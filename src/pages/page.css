@@ -1,0 +1,17 @@
+.page {
+   display: grid;
+   grid-template-columns: 15rem 1fr;
+   grid-template-areas: "sidebar main";
+}
+
+.page section {
+   width: 100%;
+}
+
+.page main {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 0 2rem;
+   grid-area: main;
+}
