@@ -1,0 +1,38 @@
+.landing-page {
+   display: grid;
+   grid-template-columns: 45% 55%;
+   grid-template-areas: "content image";
+}
+
+.content-wrapper {
+   padding: 3rem;
+   padding-left: 4.25rem;
+   grid-area: content;
+}
+
+.content-wrapper h4 {
+   color: var(--PRIMARY-COLOR);
+}
+
+.content-wrapper .button {
+   margin-top: 6rem;
+   margin-bottom: 1rem;
+   width: 10rem;
+   height: 3rem;
+   font-size: large;
+}
+
+.content-wrapper .font-semibold {
+   letter-spacing: 1px;
+   color: var(--PRIMARY-COLOR);
+   cursor: pointer;
+}
+
+.image-wrapper {
+   padding-top: 2rem;
+   grid-area: image;
+}
+
+.image-wrapper img {
+   width: 100%;
+}
