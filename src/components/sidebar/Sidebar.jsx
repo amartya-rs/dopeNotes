@@ -9,7 +9,7 @@ const Sidebar = (props) => {
       <aside className="pl-8 my-2">
          <ul className="side-nav font-medium pl-1">
             <li
-               className={props.activePage === "/" && "active"}
+               className={props.activePage === "/" ? "active" : undefined}
                onClick={() => navigate("/")}
             >
                <HomeIcon />
@@ -17,13 +17,15 @@ const Sidebar = (props) => {
             </li>
             <li
                onClick={() => navigate("/labels")}
-               className={props.activePage === "/labels" && "active"}
+               className={props.activePage === "/labels" ? "active" : undefined}
             >
                <TagIcon />
                <span>Labels</span>
             </li>
             <li
-               className={props.activePage === "/archive" && "active"}
+               className={
+                  props.activePage === "/archive" ? "active" : undefined
+               }
                onClick={() => navigate("/archive")}
             >
                <ArchiveIcon />
@@ -31,7 +33,7 @@ const Sidebar = (props) => {
             </li>
             <li
                onClick={() => navigate("/trash")}
-               className={props.activePage === "/trash" && "active"}
+               className={props.activePage === "/trash" ? "active" : undefined}
             >
                <TrashIcon />
                <span>Trash</span>
