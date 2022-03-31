@@ -1,0 +1,59 @@
+.note-card {
+   border-radius: 10px;
+   width: 20rem;
+   min-height: 18rem;
+   max-height: fit-content;
+   padding: 1.25rem;
+   margin-right: 10px;
+   margin-bottom: 10px;
+   cursor: pointer;
+   position: relative;
+
+   display: inline-flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   gap: 10px;
+}
+
+.note-card .note-title,
+.note-body {
+   width: 100%;
+   background-color: transparent;
+}
+
+.note-card .note-title {
+   height: 2.25rem;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+}
+
+.note-card .note-body {
+   height: 8rem;
+   word-break: break-all;
+   overflow: hidden;
+}
+
+.note-card .note-card-footer {
+   width: 90%;
+   visibility: hidden;
+
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+   margin-top: auto;
+   gap: 1rem;
+}
+
+.note-card:hover .note-card-footer {
+   visibility: visible;
+}
+
+.note-card .feather {
+   cursor: pointer;
+}
+
+.note-card .tag-container {
+   padding: 0;
+}
