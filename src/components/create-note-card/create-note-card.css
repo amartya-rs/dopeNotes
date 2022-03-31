@@ -1,0 +1,130 @@
+/*create note card styling*/
+.create-note-card {
+   border-radius: 10px;
+   min-width: 28rem;
+   height: max-content;
+   padding: 10px 0;
+   position: relative;
+
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+}
+
+/*styling of the input element taking the note title as input*/
+.create-note-title {
+   padding: 10px 1rem;
+   height: 3rem;
+   font-size: 14px;
+}
+
+/*common styling of the textarea and input element*/
+.create-note-title,
+.create-note-body {
+   width: 90%;
+   border: none;
+   outline: none;
+   margin: 0;
+   background-color: transparent;
+   resize: none;
+}
+
+/*input & text area placeholder text color*/
+::placeholder {
+   color: var(--SECONDARY-COLOR);
+   opacity: 1;
+}
+
+/* styling of the textarea element taking the note body as input*/
+.create-note-body {
+   padding: 1rem;
+   height: 9rem;
+}
+
+/*default bg colour of note cards*/
+.default-bg {
+   background-color: var(--PRIMARY-BUTTON-HOVER);
+}
+
+.create-note-card-footer {
+   width: 90%;
+   height: 2.5rem;
+   display: flex;
+   justify-content: flex-end;
+   align-items: center;
+}
+
+/*color picker styling*/
+.color-picker {
+   height: inherit;
+   width: min-content;
+   margin-left: 1rem;
+   margin-right: auto;
+   position: relative;
+
+   display: inline-flex;
+   justify-content: flex-end;
+   align-items: center;
+}
+
+.create-note-card .color-picker:hover .color-palette {
+   visibility: visible;
+}
+
+/*add tag styling*/
+.add-tag {
+   padding: 2px 5px;
+   border-radius: 5px;
+   cursor: pointer;
+   height: inherit;
+   font-weight: 600;
+   position: relative;
+
+   display: inline-flex;
+   align-items: center;
+}
+
+.add-tag:hover .tag-input {
+   visibility: visible;
+}
+
+/*tag container styling*/
+.tag-container {
+   width: 100%;
+   height: max-content;
+   padding: 0 1.5rem;
+
+   display: flex;
+   flex-wrap: wrap;
+   gap: 10px;
+}
+
+.tag-container > li {
+   list-style: none;
+   background-color: rgba(0, 0, 0, 0.5);
+   padding: 5px 8px;
+   border-radius: 10px;
+   font-weight: 500;
+   color: var(--WHITE);
+
+   display: inline-flex;
+   align-items: center;
+}
+
+.hide-element {
+   display: none;
+}
+
+.create-note-card .colour-pallet {
+   cursor: pointer;
+}
+
+/*icon styling*/
+.create-note-card .feather {
+   cursor: pointer;
+}
+
+.create-note-card .feather:hover {
+   transform: scale(1.1);
+}
