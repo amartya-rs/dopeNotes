@@ -76,9 +76,9 @@ const CreateNoteCard = () => {
                     <li key={index}>
                        {e}
                        <CrossIcon
-                          widht="17"
+                          width="17"
                           height="17"
-                          handler={() => removeTag(e)}
+                          onClick={() => removeTag(e)}
                        />
                     </li>
                  ))
