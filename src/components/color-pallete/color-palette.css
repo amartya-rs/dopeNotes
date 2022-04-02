@@ -1,0 +1,61 @@
+/*color palette styling*/
+.color-palette {
+   width: 7rem;
+   height: max-content;
+   padding: 10px;
+   background-color: rgba(0, 0, 0, 0.8);
+   border-radius: 5px;
+   visibility: hidden;
+   z-index: 5;
+
+   display: inline-flex;
+   align-items: center;
+   justify-content: space-evenly;
+   flex-wrap: wrap;
+   gap: 5px;
+
+   position: absolute;
+   top: -3.65rem;
+   right: -2rem;
+}
+
+.color-palette > button {
+   width: 1.2rem;
+   aspect-ratio: 1/1;
+   border-radius: 50%;
+   border: none;
+   cursor: pointer;
+}
+
+/*all colors in the palette*/
+.color-1 {
+   background-color: palevioletred;
+}
+
+.color-2 {
+   background-color: lightblue;
+}
+
+.color-3 {
+   background-color: violet;
+}
+
+.color-4 {
+   background-color: lightcoral;
+}
+
+.color-5 {
+   background-color: cyan;
+}
+
+.color-6 {
+   background-color: lawngreen;
+}
+
+.color-7 {
+   background-color: gray;
+}
+
+.color-8 {
+   background-color: darkcyan;
+}
