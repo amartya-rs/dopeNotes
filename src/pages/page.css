@@ -15,3 +15,18 @@
    padding: 0 2rem;
    grid-area: main;
 }
+
+/*tag section styling in labels page*/
+.tag-section {
+   padding: 1rem;
+}
+
+.tag-section h5 {
+   margin: 1rem 0;
+}
+
+.tag-section-heading {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+}

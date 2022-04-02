@@ -78,7 +78,31 @@ const NoteProvider = ({ children }) => {
          case "SAVE_NOTES_FROM_SERVER":
             return {
                ...state,
-               allNotes: payload,
+               allNotes: payload.filter((item) =>
+                  state.trashNotes.findIndex((e) => e._id === item._id) === -1
+                     ? true
+                     : false
+               ),
+            };
+         case "SAVE_ARCHIVED_NOTES_FROM_SERVER":
+            return {
+               ...state,
+               archivedNotes: payload,
+            };
+         case "ADD_TRASH_NOTE":
+            return {
+               ...state,
+               trashNotes: [...state.trashNotes, payload],
+            };
+         case "REMOVE_TRASH_NOTE":
+            return {
+               ...state,
+               trashNotes: payload,
+            };
+         case "RESTORE_TO_NOTES":
+            return {
+               ...state,
+               allNotes: [...state.allNotes, payload],
             };
          case "SET_ACTIVE_PAGE":
             return {
@@ -107,6 +131,8 @@ const NoteProvider = ({ children }) => {
       note: { title: "", body: "", color: "default-bg", tags: [] },
       tag: "",
       allNotes: [],
+      archivedNotes: [],
+      trashNotes: [],
       activePage: "",
    };
 

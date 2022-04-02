@@ -48,7 +48,9 @@ export const createNoteHandler = function (schema, request) {
     if (!note.tags) {
       user.notes.push({ ...note, _id: uuid(), tags: [] });
     } else {
-      user.notes.push({ ...note, _id: uuid() });
+      note.tags.length === 0
+            ? user.notes.push({ ...note, _id: uuid(), tags: ["no tag"] })
+            : user.notes.push({ ...note, _id: uuid() });
     }
     this.db.users.update({ _id: user._id }, user);
     return new Response(201, {}, { notes: user.notes });
