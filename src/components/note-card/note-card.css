@@ -57,3 +57,11 @@
 .note-card .tag-container {
    padding: 0;
 }
+
+.restore-button {
+   border: 1px solid black;
+   padding: 2px 5px;
+   background-color: transparent;
+   border-radius: 5px;
+   cursor: pointer;
+}

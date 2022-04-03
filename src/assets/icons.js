@@ -57,7 +57,7 @@ const TagIcon = () => {
    );
 };
 
-const ArchiveIcon = (props) => {
+const ArchiveIcon = ({ color, ...props }) => {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -65,12 +65,12 @@ const ArchiveIcon = (props) => {
          height="24"
          viewBox="0 0 24 24"
          fill="none"
-         stroke={props.color ?? "rgb(145, 55, 135)"}
+         stroke={color ?? "rgb(145, 55, 135)"}
          strokeWidth="2"
          strokeLinecap="round"
          strokeLinejoin="round"
          className="feather feather-archive"
-         onClick={props.archiveHandler}
+         {...props}
       >
          <polyline points="21 8 21 21 3 21 3 8" />
          <rect x="1" y="3" width="22" height="5" />
@@ -79,7 +79,7 @@ const ArchiveIcon = (props) => {
    );
 };
 
-const TrashIcon = (props) => {
+const TrashIcon = ({ color, ...props }) => {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
@@ -87,12 +87,12 @@ const TrashIcon = (props) => {
          height="24"
          viewBox="0 0 24 24"
          fill="none"
-         stroke={props.color ?? "rgb(145, 55, 135)"}
+         stroke={color ?? "rgb(145, 55, 135)"}
          strokeWidth="2"
          strokeLinecap="round"
          strokeLinejoin="round"
          className="feather feather-trash"
-         onClick={props.trashHandler}
+         {...props}
       >
          <polyline points="3 6 5 6 21 6" />
          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
@@ -180,8 +180,8 @@ const LogoutIcon = (props) => {
    return (
       <svg
          xmlns="http://www.w3.org/2000/svg"
-         width="28"
-         height="28"
+         width="20"
+         height="20"
          viewBox="0 0 24 24"
          fill="none"
          stroke="white"

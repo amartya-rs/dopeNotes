@@ -1,12 +1,18 @@
 import "./sidebar.css";
-import { TrashIcon, TagIcon, HomeIcon, ArchiveIcon } from "../../assets/icons";
+import {
+   TrashIcon,
+   TagIcon,
+   HomeIcon,
+   ArchiveIcon,
+   LogoutIcon,
+} from "../../assets/icons";
 import { useNavigate } from "react-router-dom";
 
 const Sidebar = (props) => {
    const navigate = useNavigate();
 
    return (
-      <aside className="pl-8 my-2">
+      <aside className="pl-8 mt-2">
          <ul className="side-nav font-medium pl-1">
             <li
                className={props.activePage === "/" ? "active" : undefined}
@@ -37,6 +43,12 @@ const Sidebar = (props) => {
             >
                <TrashIcon />
                <span>Trash</span>
+            </li>
+            <li>
+               <button class="button button-icons primary round-edge">
+                  <LogoutIcon />
+                  LOGOUT
+               </button>
             </li>
          </ul>
       </aside>
