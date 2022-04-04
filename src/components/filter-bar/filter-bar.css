@@ -1,0 +1,27 @@
+select {
+   padding: 3px 8px;
+   margin: 0 5px;
+   border-radius: 5px;
+   min-width: max-content;
+}
+
+.filter-bar-wrapper {
+   display: flex;
+   align-items: flex-end;
+   width: 100%;
+   margin-bottom: 1.5rem;
+   min-height: 2.5rem;
+}
+
+.filter-bar-wrapper .filter-bar {
+   margin-left: auto;
+   margin-right: 2rem;
+}
+
+.filter-bar-wrapper .button {
+   margin-left: auto;
+}
+
+.filter-bar label {
+   font-weight: 500;
+}
