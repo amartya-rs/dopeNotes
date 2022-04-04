@@ -45,7 +45,7 @@ const Sidebar = (props) => {
                <span>Trash</span>
             </li>
             <li>
-               <button class="button button-icons primary round-edge">
+               <button className="button button-icons primary round-edge">
                   <LogoutIcon />
                   LOGOUT
                </button>

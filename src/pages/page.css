@@ -19,10 +19,7 @@
 /*tag section styling in labels page*/
 .tag-section {
    padding: 1rem;
-}
-
-.tag-section h5 {
-   margin: 1rem 0;
+   padding-top: 0;
 }
 
 .tag-section-heading {
