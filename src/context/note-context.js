@@ -104,6 +104,11 @@ const NoteProvider = ({ children }) => {
                ...state,
                allNotes: [...state.allNotes, payload],
             };
+         case "FILTER_BY_TAG":
+            return {
+               ...state,
+               filterByTag: payload,
+            };
          case "SET_ACTIVE_PAGE":
             return {
                ...state,
@@ -134,10 +139,11 @@ const NoteProvider = ({ children }) => {
       archivedNotes: [],
       trashNotes: [],
       activePage: "",
+      filterByTag: "",
    };
 
    const [state, dispatch] = useReducer(noteReducer, initialState);
-
+   console.log(state.filterByTag);
    return (
       <NoteContext.Provider value={{ state, dispatch }}>
          {children}
