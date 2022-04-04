@@ -143,7 +143,7 @@ const NoteProvider = ({ children }) => {
    };
 
    const [state, dispatch] = useReducer(noteReducer, initialState);
-   console.log(state.filterByTag);
+
    return (
       <NoteContext.Provider value={{ state, dispatch }}>
          {children}
