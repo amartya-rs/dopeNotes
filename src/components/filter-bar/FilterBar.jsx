@@ -7,7 +7,9 @@ const FilterBar = () => {
 
    return (
       <div className="filter-bar">
-         <label htmlFor="filter">Filter by tag</label>
+         <label htmlFor="filter" className="font-medium">
+            Filter by tag
+         </label>
          <select
             onChange={(e) =>
                dispatch({

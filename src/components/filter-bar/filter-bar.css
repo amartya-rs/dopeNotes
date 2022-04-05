@@ -21,7 +21,3 @@ select {
 .filter-bar-wrapper .button {
    margin-left: auto;
 }
-
-.filter-bar label {
-   font-weight: 500;
-}
