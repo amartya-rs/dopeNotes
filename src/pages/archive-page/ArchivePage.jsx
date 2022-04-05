@@ -34,21 +34,16 @@ const ArchivePage = () => {
       }
    };
 
-   //deleting note from archives
-   const deleteFromArchive = async (id) => {
-      try {
-         const response = await axios.delete(`/api/archives/delete/${id}`, {
-            headers: {
-               authorization: localStorage.getItem("token"),
-            },
-         });
-         dispatch({
-            type: "SAVE_ARCHIVED_NOTES_FROM_SERVER",
-            payload: response.data.archives,
-         });
-      } catch (error) {
-         console.log(error);
-      }
+   //moving note to trash
+   const moveToTrash = (note) => {
+      const notesUpdated = state.archivedNotes.filter(
+         (e) => e._id !== note._id
+      );
+      dispatch({
+         type: "SAVE_ARCHIVED_NOTES_FROM_SERVER",
+         payload: notesUpdated,
+      });
+      dispatch({ type: "ADD_TRASH_NOTE", payload: note });
    };
 
    return (
@@ -67,7 +62,7 @@ const ArchivePage = () => {
                      </button>
                      <TrashIcon
                         color="black"
-                        onClick={() => deleteFromArchive(item._id)}
+                        onClick={() => moveToTrash(item)}
                      />
                   </NoteCard>
                ))}

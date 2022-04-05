@@ -1,13 +1,24 @@
-import { Sidebar, NoteCard, CreateNoteCard } from "../../components/index";
+import {
+   Sidebar,
+   NoteCard,
+   CreateNoteCard,
+   FilterBar,
+} from "../../components/index";
 import { useNote } from "../../context/note-context";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { ArchiveIcon, TrashIcon } from "../../assets/icons";
+import { notesToDisplay } from "../../utils/filters";
+import { useEffect } from "react/";
 import "../page.css";
 
 const HomePage = () => {
    const { pathname } = useLocation();
    const { state, dispatch } = useNote();
+
+   useEffect(() => {
+      dispatch({ type: "FILTER_BY_TAG", payload: "" });
+   }, []);
 
    //adding note to archive
    const moveToArchive = async (id) => {
@@ -45,15 +56,18 @@ const HomePage = () => {
       <div className="page">
          <Sidebar activePage={pathname} />
          <main className="mt-2">
-            <button
-               className="button primary mb-2"
-               onClick={() => dispatch({ type: "TOGGLE_CARD_VISIBILITY" })}
-            >
-               {state.isVisible ? "CLOSE" : "CREATE NEW NOTE"}
-            </button>
+            <div className="filter-bar-wrapper">
+               <button
+                  className="button primary"
+                  onClick={() => dispatch({ type: "TOGGLE_CARD_VISIBILITY" })}
+               >
+                  {state.isVisible ? "CLOSE" : "CREATE NEW NOTE"}
+               </button>
+               <FilterBar />
+            </div>
             <CreateNoteCard />
             <section className="mt-4">
-               {state.allNotes.map((item) => (
+               {notesToDisplay(state).map((item) => (
                   <NoteCard key={item._id} note={item}>
                      <ArchiveIcon
                         color="black"

@@ -5,6 +5,7 @@ import { CreateNoteCard } from "./create-note-card/CreateNoteCard";
 import { NoteCard } from "./note-card/NoteCard";
 import { ColorPalette } from "./color-pallete/ColorPalette";
 import { TagInput } from "./tag-input/TagInput";
+import { FilterBar } from "./filter-bar/FilterBar";
 
 export {
    TopNav,
@@ -14,4 +15,5 @@ export {
    NoteCard,
    ColorPalette,
    TagInput,
+   FilterBar,
 };

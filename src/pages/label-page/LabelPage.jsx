@@ -3,11 +3,19 @@ import { useNote } from "../../context/note-context";
 import { TagIcon, TrashIcon, ArchiveIcon } from "../../assets/icons";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { allTagsArray } from "../../utils/allTagsArray";
+import { FilterBar } from "../../components/index";
+import { notesToDisplay } from "../../utils/filters";
+import { useEffect } from "react";
 import "../page.css";
 
 const LabelPage = () => {
    const { pathname } = useLocation();
    const { state, dispatch } = useNote();
+
+   useEffect(() => {
+      dispatch({ type: "FILTER_BY_TAG", payload: "" });
+   }, []);
 
    //adding note to archive
    const moveToArchive = async (id) => {
@@ -44,34 +52,39 @@ const LabelPage = () => {
    return (
       <div className="page">
          <Sidebar activePage={pathname} />
-         <main>
+         <main className="mt-2">
+            <div className="filter-bar-wrapper">
+               <FilterBar />
+            </div>
             <section className="tag-section">
-               {[
-                  ...new Set(
-                     state.allNotes.reduce((acc, i) => acc.concat(i.tags), [])
-                  ),
-               ].map((tag, index) => (
-                  <section key={index}>
-                     <div className="tag-section-heading">
-                        <TagIcon />
-                        <h5 className="font-medium">{tag}</h5>
-                     </div>
-                     {state.allNotes
-                        .filter((item) => item.tags.includes(tag))
-                        .map((item) => (
-                           <NoteCard key={item._id} note={item}>
-                              <ArchiveIcon
-                                 color="black"
-                                 onClick={() => moveToArchive(item._id)}
-                              />
-                              <TrashIcon
-                                 color="black"
-                                 onClick={() => moveToTrash(item)}
-                              />
-                           </NoteCard>
-                        ))}
-                  </section>
-               ))}
+               {allTagsArray(state).map((tag, index) =>
+                  notesToDisplay(state).findIndex((e) =>
+                     e.tags.includes(tag)
+                  ) !== -1 ? (
+                     <section key={index}>
+                        <div className="tag-section-heading mb-2">
+                           <TagIcon />
+                           <h5 className="font-medium">{tag}</h5>
+                        </div>
+                        {notesToDisplay(state)
+                           .filter((item) => item.tags.includes(tag))
+                           .map((item) => (
+                              <NoteCard key={item._id} note={item}>
+                                 <ArchiveIcon
+                                    color="black"
+                                    onClick={() => moveToArchive(item._id)}
+                                 />
+                                 <TrashIcon
+                                    color="black"
+                                    onClick={() => moveToTrash(item)}
+                                 />
+                              </NoteCard>
+                           ))}
+                     </section>
+                  ) : (
+                     ""
+                  )
+               )}
             </section>
          </main>
       </div>

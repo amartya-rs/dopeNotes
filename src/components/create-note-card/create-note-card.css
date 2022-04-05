@@ -4,7 +4,9 @@
    min-width: 28rem;
    height: max-content;
    padding: 10px 0;
+
    position: relative;
+   left: -7rem;
 
    display: flex;
    flex-direction: column;
