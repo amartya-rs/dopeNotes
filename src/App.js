@@ -6,6 +6,7 @@ import {
    TrashPage,
    LandingPage,
    LabelPage,
+   Page404,
 } from "./pages/index";
 import { TopNav, Footer } from "./components";
 
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/labels" element={<LabelPage />} />
             <Route path="/archive" element={<ArchivePage />} />
             <Route path="/trash" element={<TrashPage />} />
+            <Route path="*" element={<Page404 />} />
          </Routes>
          <Footer />
       </div>
