@@ -75,6 +75,14 @@ const noteReducer = (state, { type, payload }) => {
             ...state,
             filterByPriority: payload,
          };
+      case "UPDATE_TAGS":
+         return {
+            ...state,
+            note: {
+               ...state.note,
+               tags: payload,
+            },
+         };
       case "SET_ACTIVE_PAGE":
          return {
             ...state,
