@@ -75,10 +75,37 @@ const noteReducer = (state, { type, payload }) => {
             ...state,
             filterByPriority: payload,
          };
+      case "UPDATE_TAGS":
+         return {
+            ...state,
+            note: {
+               ...state.note,
+               tags: payload,
+            },
+         };
       case "SET_ACTIVE_PAGE":
          return {
             ...state,
             activePage: payload,
+         };
+      case "TOGGLE_EDIT":
+         return {
+            ...state,
+            doEdit: !state.doEdit,
+         };
+      case "EDIT_NOTE":
+         return {
+            ...state,
+            isVisible: true,
+            note: {
+               ...state.note,
+               id: payload._id,
+               title: payload.title,
+               body: payload.body,
+               tags: payload.tags,
+               color: payload.color,
+               priority: payload.priority,
+            },
          };
       case "RESET_FILTERS":
          return {
@@ -98,6 +125,7 @@ const noteReducer = (state, { type, payload }) => {
                priority: "",
             },
             tag: "",
+            doEdit: false,
          };
       default:
          return state;
@@ -114,6 +142,7 @@ const initialState = {
       priority: "",
    },
    tag: "",
+   id: "",
    allNotes: [],
    archivedNotes: [],
    trashNotes: [],

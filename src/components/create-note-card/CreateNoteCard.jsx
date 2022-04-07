@@ -6,15 +6,15 @@ import { ColorPalette, TagInput, PriorityInput } from "../../components/index";
 import { setPriorityColor } from "../../utils/setPriorityColor";
 
 const CreateNoteCard = () => {
-   const { state, dispatch, addNote } = useNote();
+   const { state, dispatch, addNote, updateNote } = useNote();
 
    //removing a tag from the tags array
    const removeTag = (tag) => {
       if (state.note.tags.length !== 0) {
          const index = state.note.tags.findIndex((e) => e === tag);
-         state.note.tags.splice(index, 1);
-         dispatch({ type: "SET_TAG_INPUT", payload: "" });
-         return state.note.tags;
+         const copyOfTags = [...state.note.tags];
+         copyOfTags.splice(index, 1);
+         dispatch({ type: "UPDATE_TAGS", payload: copyOfTags });
       }
       return state.note.tags;
    };
@@ -46,32 +46,43 @@ const CreateNoteCard = () => {
          </span>
          <ul className="tag-container">
             {state.note.tags.length !== 0
-               ? state.note.tags.map((e, index) => (
-                    <li key={index}>
-                       {e}
-                       <CrossIcon
-                          width="17"
-                          height="17"
-                          onClick={() => removeTag(e)}
-                       />
-                    </li>
-                 ))
+               ? state.note.tags
+                    .filter((e) => e !== "no tag")
+                    .map((e, index) => (
+                       <li key={index}>
+                          {e}
+                          <CrossIcon
+                             width="17"
+                             height="17"
+                             onClick={() => removeTag(e)}
+                          />
+                       </li>
+                    ))
                : ""}
          </ul>
          <div className="create-note-card-footer">
             <div className="add-tag">
-               Add Tag
+               {state.doEdit ? "Update Tag" : "Add Tag"}
                <TagInput />
             </div>
             <div className="add-priority">
-               Add Priority
+               {state.doEdit ? "Update Priority" : "Add Priority"}
                <PriorityInput />
             </div>
             <div className="color-picker">
                <PaletteIcon className="colour-pallet" />
                <ColorPalette />
             </div>
-            <PlusIcon onClick={addNote} />
+            {state.doEdit ? (
+               <button
+                  className="font-semibold restore-button"
+                  onClick={() => updateNote(state.note.id)}
+               >
+                  Update note
+               </button>
+            ) : (
+               <PlusIcon onClick={addNote} />
+            )}
          </div>
       </div>
    );

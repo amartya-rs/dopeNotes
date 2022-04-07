@@ -3,7 +3,11 @@ import {
    NoteCard,
    CreateNoteCard,
    FilterBar,
+   ColorPalette,
+   TagInput,
+   PriorityInput,
 } from "../../components/index";
+import { CrossIcon, PaletteIcon, PlusIcon } from "../../assets/icons";
 import { useNote } from "../../context/note-context";
 import { useLocation } from "react-router-dom";
 import { ArchiveIcon, TrashIcon } from "../../assets/icons";
@@ -13,7 +17,7 @@ import "../page.css";
 
 const HomePage = () => {
    const { pathname } = useLocation();
-   const { state, dispatch, moveToArchive } = useNote();
+   const { state, dispatch, moveToArchive, updateNote } = useNote();
 
    //resetting filter on page load
    useEffect(() => {
@@ -45,6 +49,16 @@ const HomePage = () => {
             <section className="mt-4">
                {notesToDisplay(state).map((item) => (
                   <NoteCard key={item._id} note={item}>
+                     <button
+                        onClick={() => {
+                           dispatch({ type: "EDIT_NOTE", payload: item });
+                           dispatch({ type: "TOGGLE_EDIT" });
+                        }}
+                        className="font-semibold restore-button"
+                     >
+                        Edit
+                     </button>
+
                      <ArchiveIcon
                         color="black"
                         onClick={() => moveToArchive(item._id)}

@@ -141,6 +141,35 @@ const NoteProvider = ({ children }) => {
       }
    };
 
+   //update a note via API call
+   const updateNote = async (id) => {
+      if (state.note.title !== "" && state.note.body !== "") {
+         try {
+            const response = await axios.post(
+               `/api/notes/${id}`,
+               {
+                  note: state.note,
+               },
+               {
+                  headers: {
+                     authorization: localStorage.getItem("token"),
+                  },
+               }
+            );
+            dispatch({
+               type: "SAVE_NOTES_FROM_SERVER",
+               payload: response.data.notes,
+            });
+            //setting all the fields to initial state
+            dispatch({
+               type: "CLEAR_FIELDS",
+            });
+         } catch (error) {
+            console.log(error);
+         }
+      }
+   };
+
    //deleting permanently from notes
    const deleteFromNotes = async (id) => {
       try {
@@ -191,6 +220,7 @@ const NoteProvider = ({ children }) => {
             moveToArchive,
             deleteFromNotes,
             deleteFromArchive,
+            updateNote,
          }}
       >
          {children}
