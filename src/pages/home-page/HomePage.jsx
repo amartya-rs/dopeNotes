@@ -61,11 +61,13 @@ const HomePage = () => {
 
                      <ArchiveIcon
                         color="black"
-                        onClick={() => moveToArchive(item._id)}
+                        onClick={
+                           state.doEdit ? "" : () => moveToArchive(item._id)
+                        }
                      />
                      <TrashIcon
                         color="black"
-                        onClick={() => moveToTrash(item)}
+                        onClick={state.doEdit ? "" : () => moveToTrash(item)}
                      />
                   </NoteCard>
                ))}
