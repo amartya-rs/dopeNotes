@@ -2,7 +2,6 @@ import { Sidebar } from "../../components";
 import { useLocation } from "react-router-dom";
 import { NoteCard } from "../../components";
 import { useNote } from "../../context/note-context";
-import axios from "axios";
 import { TrashIcon } from "../../assets/icons";
 import "../page.css";
 

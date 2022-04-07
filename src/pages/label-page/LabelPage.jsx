@@ -15,6 +15,7 @@ const LabelPage = () => {
    //resetting filter on page load
    useEffect(() => {
       dispatch({ type: "FILTER_BY_TAG", payload: "" });
+      // eslint-disable-next-line
    }, []);
 
    //moving note to trash
