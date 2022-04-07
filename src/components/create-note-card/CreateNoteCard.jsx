@@ -6,7 +6,7 @@ import { ColorPalette, TagInput, PriorityInput } from "../../components/index";
 import { setPriorityColor } from "../../utils/setPriorityColor";
 
 const CreateNoteCard = () => {
-   const { state, dispatch, addNote } = useNote();
+   const { state, dispatch, addNote, updateNote } = useNote();
 
    //removing a tag from the tags array
    const removeTag = (tag) => {
@@ -71,7 +71,16 @@ const CreateNoteCard = () => {
                <PaletteIcon className="colour-pallet" />
                <ColorPalette />
             </div>
-            <PlusIcon onClick={addNote} />
+            {state.doEdit ? (
+               <button
+                  className="font-semibold restore-button"
+                  onClick={() => updateNote(state.note.id)}
+               >
+                  Update note
+               </button>
+            ) : (
+               <PlusIcon onClick={addNote} />
+            )}
          </div>
       </div>
    );
