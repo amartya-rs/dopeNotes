@@ -2,40 +2,10 @@ import React from "react";
 import { useNote } from "../../context/note-context";
 import { CrossIcon, PaletteIcon, PlusIcon } from "../../assets/icons";
 import "./create-note-card.css";
-import axios from "axios";
 import { ColorPalette, TagInput } from "../../components/index";
 
 const CreateNoteCard = () => {
-   const { state, dispatch } = useNote();
-
-   //adding a note via API call
-   const addNote = async () => {
-      if (state.note.title !== "" && state.note.body !== "") {
-         try {
-            const response = await axios.post(
-               `/api/notes`,
-               {
-                  note: state.note,
-               },
-               {
-                  headers: {
-                     authorization: localStorage.getItem("token"),
-                  },
-               }
-            );
-            dispatch({
-               type: "SAVE_NOTES_FROM_SERVER",
-               payload: response.data.notes,
-            });
-            //setting all the fields to initial state
-            dispatch({
-               type: "CLEAR_FIELDS",
-            });
-         } catch (error) {
-            console.log(error);
-         }
-      }
-   };
+   const { state, dispatch, addNote } = useNote();
 
    //removing a tag from the tags array
    const removeTag = (tag) => {

@@ -2,7 +2,6 @@ import { NoteCard, Sidebar } from "../../components/index";
 import { useNote } from "../../context/note-context";
 import { TagIcon, TrashIcon, ArchiveIcon } from "../../assets/icons";
 import { useLocation } from "react-router-dom";
-import axios from "axios";
 import { allTagsArray } from "../../utils/allTagsArray";
 import { FilterBar } from "../../components/index";
 import { notesToDisplay } from "../../utils/filters";
@@ -11,36 +10,12 @@ import "../page.css";
 
 const LabelPage = () => {
    const { pathname } = useLocation();
-   const { state, dispatch } = useNote();
+   const { state, dispatch, moveToArchive } = useNote();
 
+   //resetting filter on page load
    useEffect(() => {
       dispatch({ type: "FILTER_BY_TAG", payload: "" });
    }, []);
-
-   //adding note to archive
-   const moveToArchive = async (id) => {
-      try {
-         const response = await axios.post(
-            `/api/notes/archives/${id}`,
-            {},
-            {
-               headers: {
-                  authorization: localStorage.getItem("token"),
-               },
-            }
-         );
-         dispatch({
-            type: "SAVE_NOTES_FROM_SERVER",
-            payload: response.data.notes,
-         });
-         dispatch({
-            type: "SAVE_ARCHIVED_NOTES_FROM_SERVER",
-            payload: response.data.archives,
-         });
-      } catch (error) {
-         console.log(error);
-      }
-   };
 
    //moving note to trash
    const moveToTrash = (note) => {

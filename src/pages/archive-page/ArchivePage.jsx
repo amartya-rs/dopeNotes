@@ -1,50 +1,12 @@
 import { NoteCard, Sidebar } from "../../components";
 import { useLocation } from "react-router-dom";
 import { useNote } from "../../context/note-context";
-import axios from "axios";
 import { TrashIcon } from "../../assets/icons";
 import "../page.css";
 
 const ArchivePage = () => {
    const { pathname } = useLocation();
-   const { state, dispatch } = useNote();
-
-   //restoring note from archives to notes
-   const restoreNote = async (id) => {
-      try {
-         const response = await axios.post(
-            `/api/archives/restore/${id}`,
-            {},
-            {
-               headers: {
-                  authorization: localStorage.getItem("token"),
-               },
-            }
-         );
-         dispatch({
-            type: "SAVE_NOTES_FROM_SERVER",
-            payload: response.data.notes,
-         });
-         dispatch({
-            type: "SAVE_ARCHIVED_NOTES_FROM_SERVER",
-            payload: response.data.archives,
-         });
-      } catch (error) {
-         console.log(error);
-      }
-   };
-
-   //moving note to trash
-   const moveToTrash = (note) => {
-      const notesUpdated = state.archivedNotes.filter(
-         (e) => e._id !== note._id
-      );
-      dispatch({
-         type: "SAVE_ARCHIVED_NOTES_FROM_SERVER",
-         payload: notesUpdated,
-      });
-      dispatch({ type: "ADD_TRASH_NOTE", payload: note });
-   };
+   const { state, restoreNote, deleteFromArchive } = useNote();
 
    return (
       <div className="page">
@@ -62,7 +24,7 @@ const ArchivePage = () => {
                      </button>
                      <TrashIcon
                         color="black"
-                        onClick={() => moveToTrash(item)}
+                        onClick={() => deleteFromArchive(item._id)}
                      />
                   </NoteCard>
                ))}

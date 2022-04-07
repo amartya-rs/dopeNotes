@@ -43,10 +43,156 @@ const NoteProvider = ({ children }) => {
       })();
    }, []);
 
+   //fetching archived notes from the server
+   useEffect(() => {
+      (async () => {
+         try {
+            const response = await axios.get(`/api/archives`, {
+               headers: {
+                  authorization: localStorage.getItem("token"),
+               },
+            });
+            dispatch({
+               type: "SAVE_ARCHIVED_NOTES_FROM_SERVER",
+               payload: response.data.archives,
+            });
+         } catch (error) {
+            console.log(error);
+         }
+      })();
+   }, []);
+
+   //adding a note via API call
+   const addNote = async () => {
+      if (state.note.title !== "" && state.note.body !== "") {
+         try {
+            const response = await axios.post(
+               `/api/notes`,
+               {
+                  note: state.note,
+               },
+               {
+                  headers: {
+                     authorization: localStorage.getItem("token"),
+                  },
+               }
+            );
+            dispatch({
+               type: "SAVE_NOTES_FROM_SERVER",
+               payload: response.data.notes,
+            });
+            //setting all the fields to initial state
+            dispatch({
+               type: "CLEAR_FIELDS",
+            });
+         } catch (error) {
+            console.log(error);
+         }
+      }
+   };
+
+   //adding note to archive
+   const moveToArchive = async (id) => {
+      try {
+         const response = await axios.post(
+            `/api/notes/archives/${id}`,
+            {},
+            {
+               headers: {
+                  authorization: localStorage.getItem("token"),
+               },
+            }
+         );
+         dispatch({
+            type: "SAVE_NOTES_FROM_SERVER",
+            payload: response.data.notes,
+         });
+         dispatch({
+            type: "SAVE_ARCHIVED_NOTES_FROM_SERVER",
+            payload: response.data.archives,
+         });
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
+   //restoring note from archives to notes
+   const restoreNote = async (id) => {
+      try {
+         const response = await axios.post(
+            `/api/archives/restore/${id}`,
+            {},
+            {
+               headers: {
+                  authorization: localStorage.getItem("token"),
+               },
+            }
+         );
+         dispatch({
+            type: "SAVE_NOTES_FROM_SERVER",
+            payload: response.data.notes,
+         });
+         dispatch({
+            type: "SAVE_ARCHIVED_NOTES_FROM_SERVER",
+            payload: response.data.archives,
+         });
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
+   //deleting permanently from notes
+   const deleteFromNotes = async (id) => {
+      try {
+         const response = await axios.delete(`/api/notes/${id}`, {
+            headers: {
+               authorization: localStorage.getItem("token"),
+            },
+         });
+         dispatch({
+            type: "SAVE_NOTES_FROM_SERVER",
+            payload: response.data.notes,
+         });
+         dispatch({
+            type: "REMOVE_TRASH_NOTE",
+            payload: state.trashNotes.filter((item) => item._id !== id),
+         });
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
+   //deleting permanently from archives
+   const deleteFromArchive = async (id) => {
+      try {
+         const response = await axios.delete(`/api/archives/delete/${id}`, {
+            headers: {
+               authorization: localStorage.getItem("token"),
+            },
+         });
+         dispatch({
+            type: "SAVE_ARCHIVED_NOTES_FROM_SERVER",
+            payload: response.data.archives,
+         });
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
    const [state, dispatch] = useReducer(noteReducer, initialState);
 
    return (
-      <NoteContext.Provider value={{ state, dispatch }}>
+      <NoteContext.Provider
+         value={{
+            state,
+            dispatch,
+            addNote,
+            restoreNote,
+            moveToArchive,
+            deleteFromNotes,
+            deleteFromArchive,
+         }}
+      >
          {children}
       </NoteContext.Provider>
    );

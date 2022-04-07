@@ -8,28 +8,7 @@ import "../page.css";
 
 const TrashPage = () => {
    const { pathname } = useLocation();
-   const { state, dispatch } = useNote();
-
-   //deleting from trash notes
-   const deleteFromNotes = async (id) => {
-      try {
-         const response = await axios.delete(`/api/notes/${id}`, {
-            headers: {
-               authorization: localStorage.getItem("token"),
-            },
-         });
-         dispatch({
-            type: "SAVE_NOTES_FROM_SERVER",
-            payload: response.data.notes,
-         });
-         dispatch({
-            type: "REMOVE_TRASH_NOTE",
-            payload: state.trashNotes.filter((item) => item._id !== id),
-         });
-      } catch (error) {
-         console.log(error);
-      }
-   };
+   const { state, dispatch, deleteFromNotes } = useNote();
 
    //restoring from trash to notes
    const restoreToNotes = (note) => {
