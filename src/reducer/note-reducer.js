@@ -26,6 +26,11 @@ const noteReducer = (state, { type, payload }) => {
             ...state,
             tag: payload,
          };
+      case "SET_PRIORITY":
+         return {
+            ...state,
+            note: { ...state.note, priority: payload },
+         };
       case "SET_TAGS":
          return {
             ...state,
@@ -65,10 +70,21 @@ const noteReducer = (state, { type, payload }) => {
             ...state,
             filterByTag: payload,
          };
+      case "FILTER_BY_PRIORITY":
+         return {
+            ...state,
+            filterByPriority: payload,
+         };
       case "SET_ACTIVE_PAGE":
          return {
             ...state,
             activePage: payload,
+         };
+      case "RESET_FILTERS":
+         return {
+            ...state,
+            filterByTag: "",
+            filterByPriority: "",
          };
       case "CLEAR_FIELDS":
          return {
@@ -79,6 +95,7 @@ const noteReducer = (state, { type, payload }) => {
                body: "",
                tags: [],
                color: "default-bg",
+               priority: "",
             },
             tag: "",
          };
@@ -89,13 +106,20 @@ const noteReducer = (state, { type, payload }) => {
 
 const initialState = {
    isVisible: false,
-   note: { title: "", body: "", color: "default-bg", tags: [] },
+   note: {
+      title: "",
+      body: "",
+      color: "default-bg",
+      tags: [],
+      priority: "",
+   },
    tag: "",
    allNotes: [],
    archivedNotes: [],
    trashNotes: [],
    activePage: "",
    filterByTag: "",
+   filterByPriority: "",
 };
 
 export { initialState, noteReducer };

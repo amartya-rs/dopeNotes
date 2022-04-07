@@ -1,0 +1,48 @@
+.priority-wrapper {
+   width: 6rem;
+   height: max-content;
+   padding: 10px;
+   background-color: rgba(0, 0, 0, 0.8);
+   border-radius: 5px;
+   cursor: default;
+   visibility: hidden;
+   z-index: 5;
+
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   gap: 5px;
+
+   position: absolute;
+   top: -6.6rem;
+   left: 0;
+}
+.priority-wrapper > button {
+   color: var(--WHITE);
+   border: none;
+   background-color: rgba(0, 0, 0, 0.8);
+   border-radius: 5px;
+   padding: 5px 10px;
+   width: 100%;
+   cursor: pointer;
+}
+
+.high-priority {
+   background-color: var(--DANGER-COLOR);
+}
+
+.medium-priority {
+   background-color: rgb(238, 142, 64);
+}
+
+.low-priority {
+   background-color: var(--WARNING-COLOR);
+}
+
+.add-priority {
+   position: relative;
+}
+
+.add-priority:hover .priority-wrapper {
+   visibility: visible;
+}

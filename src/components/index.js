@@ -6,6 +6,7 @@ import { NoteCard } from "./note-card/NoteCard";
 import { ColorPalette } from "./color-pallete/ColorPalette";
 import { TagInput } from "./tag-input/TagInput";
 import { FilterBar } from "./filter-bar/FilterBar";
+import { PriorityInput } from "./priority-input/PriorityInput";
 
 export {
    TopNav,
@@ -16,4 +17,5 @@ export {
    ColorPalette,
    TagInput,
    FilterBar,
+   PriorityInput,
 };

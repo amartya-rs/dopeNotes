@@ -17,7 +17,7 @@ const HomePage = () => {
 
    //resetting filter on page load
    useEffect(() => {
-      dispatch({ type: "FILTER_BY_TAG", payload: "" });
+      dispatch({ type: "RESET_FILTERS", payload: "" });
       // eslint-disable-next-line
    }, []);
 

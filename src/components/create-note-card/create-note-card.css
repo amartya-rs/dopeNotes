@@ -130,3 +130,23 @@
 .create-note-card .feather:hover {
    transform: scale(1.1);
 }
+
+.add-priority {
+   cursor: pointer;
+   height: inherit;
+   font-weight: 600;
+   margin-left: 1rem;
+
+   display: inline-flex;
+   align-items: center;
+}
+
+.priority {
+   padding: 5px 10px;
+   border-radius: 5px;
+   font-weight: 600;
+
+   position: absolute;
+   top: 1rem;
+   right: 1rem;
+}
