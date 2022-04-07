@@ -32,32 +32,36 @@ const LabelPage = () => {
                <FilterBar />
             </div>
             <section className="tag-section">
-               {allTagsArray(state).map((tag, index) =>
-                  notesToDisplay(state).findIndex((e) =>
-                     e.tags.includes(tag)
-                  ) !== -1 ? (
-                     <section key={index}>
-                        <div className="tag-section-heading mb-2">
-                           <TagIcon />
-                           <h5 className="font-medium">{tag}</h5>
-                        </div>
-                        {notesToDisplay(state)
-                           .filter((item) => item.tags.includes(tag))
-                           .map((item) => (
-                              <NoteCard key={item._id} note={item}>
-                                 <ArchiveIcon
-                                    color="black"
-                                    onClick={() => moveToArchive(item._id)}
-                                 />
-                                 <TrashIcon
-                                    color="black"
-                                    onClick={() => moveToTrash(item)}
-                                 />
-                              </NoteCard>
-                           ))}
-                     </section>
-                  ) : (
-                     ""
+               {state.allNotes.length === 0 ? (
+                  <h4 className="no-note-msg">No notes found</h4>
+               ) : (
+                  allTagsArray(state).map((tag, index) =>
+                     notesToDisplay(state).findIndex((e) =>
+                        e.tags.includes(tag)
+                     ) !== -1 ? (
+                        <section key={index}>
+                           <div className="tag-section-heading mb-2">
+                              <TagIcon />
+                              <h5 className="font-medium">{tag}</h5>
+                           </div>
+                           {notesToDisplay(state)
+                              .filter((item) => item.tags.includes(tag))
+                              .map((item) => (
+                                 <NoteCard key={item._id} note={item}>
+                                    <ArchiveIcon
+                                       color="black"
+                                       onClick={() => moveToArchive(item._id)}
+                                    />
+                                    <TrashIcon
+                                       color="black"
+                                       onClick={() => moveToTrash(item)}
+                                    />
+                                 </NoteCard>
+                              ))}
+                        </section>
+                     ) : (
+                        ""
+                     )
                   )
                )}
             </section>

@@ -27,3 +27,8 @@
    align-items: center;
    gap: 8px;
 }
+
+.no-note-msg {
+   text-align: center;
+   color: var(--GREY);
+}

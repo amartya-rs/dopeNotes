@@ -25,20 +25,24 @@ const TrashPage = () => {
          <main>
             <h5 className="mt-2">{`Trash Notes - ${state.trashNotes.length}`}</h5>
             <section className="mt-4">
-               {state.trashNotes.map((item) => (
-                  <NoteCard key={item._id} note={item}>
-                     <button
-                        onClick={() => restoreToNotes(item)}
-                        className="font-semibold restore-button"
-                     >
-                        Restore
-                     </button>
-                     <TrashIcon
-                        color="black"
-                        onClick={() => deleteFromNotes(item._id)}
-                     />
-                  </NoteCard>
-               ))}
+               {state.trashNotes.length === 0 ? (
+                  <h4 className="no-note-msg">No trash notes found</h4>
+               ) : (
+                  state.trashNotes.map((item) => (
+                     <NoteCard key={item._id} note={item}>
+                        <button
+                           onClick={() => restoreToNotes(item)}
+                           className="font-semibold restore-button"
+                        >
+                           Restore
+                        </button>
+                        <TrashIcon
+                           color="black"
+                           onClick={() => deleteFromNotes(item._id)}
+                        />
+                     </NoteCard>
+                  ))
+               )}
             </section>
          </main>
       </div>
