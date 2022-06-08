@@ -7,6 +7,9 @@ import { ColorPalette } from "./color-pallete/ColorPalette";
 import { TagInput } from "./tag-input/TagInput";
 import { FilterBar } from "./filter-bar/FilterBar";
 import { PriorityInput } from "./priority-input/PriorityInput";
+import { Modal } from "./modal/Modal";
+import { PrivateRoute } from "../components/auth/PrivateRoute";
+import { RestrictedRoute } from "../components/auth/RestrictedRoute";
 
 export {
    TopNav,
@@ -18,4 +21,7 @@ export {
    TagInput,
    FilterBar,
    PriorityInput,
+   Modal,
+   PrivateRoute,
+   RestrictedRoute,
 };

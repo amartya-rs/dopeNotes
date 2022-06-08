@@ -1,0 +1,69 @@
+.modal-container {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100vw;
+   height: 100vh;
+   background-color: var(--MODAL-CONTAINER-BG);
+   z-index: 10;
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.modal {
+   height: max-content;
+   min-width: 30%;
+   background-color: var(--WHITE);
+   border-radius: 10px;
+   padding: 2rem;
+   position: relative;
+
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   gap: 1rem;
+}
+
+.modal-footer {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+}
+
+.modal .input-group,
+label {
+   width: 100%;
+}
+
+.modal input {
+   margin-top: 8px;
+}
+
+.hide-modal {
+   display: none;
+}
+
+.auth-form {
+   box-shadow: none;
+   border: none;
+
+   position: relative;
+}
+
+.corner-button {
+   right: 1.2rem;
+   top: 1.2rem;
+}
+
+.auth-error {
+   color: var(--DANGER-COLOR);
+}
+
+.helper {
+   cursor: pointer;
+}
