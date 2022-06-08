@@ -3,21 +3,20 @@ import {
    NoteCard,
    CreateNoteCard,
    FilterBar,
-   ColorPalette,
-   TagInput,
-   PriorityInput,
 } from "../../components/index";
-import { CrossIcon, PaletteIcon, PlusIcon } from "../../assets/icons";
 import { useNote } from "../../context/note-context";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ArchiveIcon, TrashIcon } from "../../assets/icons";
 import { notesToDisplay } from "../../utils/filters";
-import { useEffect } from "react/";
+import { useEffect } from "react";
+import { useAuth } from "../../context/auth-context";
 import "../page.css";
 
 const HomePage = () => {
    const { pathname } = useLocation();
-   const { state, dispatch, moveToArchive, updateNote } = useNote();
+   const { state, dispatch, moveToArchive } = useNote();
+   const { authDispatch } = useAuth();
+   const navigate = useNavigate();
 
    //resetting filter on page load
    useEffect(() => {
@@ -32,9 +31,17 @@ const HomePage = () => {
       dispatch({ type: "ADD_TRASH_NOTE", payload: note });
    };
 
+   //logout handler
+   const logoutUser = () => {
+      localStorage.removeItem("token");
+      authDispatch({ type: "CLEAR_FIELDS" });
+      authDispatch({ type: "TOGGLE_LOGIN", payload: false });
+      navigate("/");
+   };
+
    return (
       <div className="page">
-         <Sidebar activePage={pathname} />
+         <Sidebar activePage={pathname} logout={logoutUser} />
          <main className="mt-2">
             <div className="filter-bar-wrapper">
                <button
@@ -58,7 +65,6 @@ const HomePage = () => {
                      >
                         Edit
                      </button>
-
                      <ArchiveIcon
                         color="black"
                         onClick={() => moveToArchive(item._id)}

@@ -2,65 +2,54 @@ import { createContext, useContext, useReducer } from "react";
 import { useEffect } from "react";
 import axios from "axios";
 import { noteReducer, initialState } from "../reducer/note-reducer";
+import { useAuth } from "./auth-context";
 
 const NoteContext = createContext();
 
 const NoteProvider = ({ children }) => {
-   //authorization for accessing the private routes
-   useEffect(() => {
-      (async () => {
-         try {
-            const response = await axios.post(`/api/auth/signup`, {
-               firstName: "Adarsh",
-               lastName: "Balika",
-               email: "adarshbalika@neog.camp",
-               password: "adarshBalika",
-            });
-            // saving the encodedToken in the localStorage
-            localStorage.setItem("token", response.data.encodedToken);
-         } catch (error) {
-            console.log(error);
-         }
-      })();
-   }, []);
+   const { isLoggedIn } = useAuth();
 
    //fetching all notes from the server
    useEffect(() => {
-      (async () => {
-         try {
-            const response = await axios.get(`/api/notes`, {
-               headers: {
-                  authorization: localStorage.getItem("token"),
-               },
-            });
-            dispatch({
-               type: "SAVE_NOTES_FROM_SERVER",
-               payload: response.data.notes,
-            });
-         } catch (error) {
-            console.log(error);
-         }
-      })();
-   }, []);
+      if (isLoggedIn) {
+         (async () => {
+            try {
+               const response = await axios.get(`/api/notes`, {
+                  headers: {
+                     authorization: localStorage.getItem("token"),
+                  },
+               });
+               dispatch({
+                  type: "SAVE_NOTES_FROM_SERVER",
+                  payload: response.data.notes,
+               });
+            } catch (error) {
+               console.log(error);
+            }
+         })();
+      }
+   }, [isLoggedIn]);
 
    //fetching archived notes from the server
    useEffect(() => {
-      (async () => {
-         try {
-            const response = await axios.get(`/api/archives`, {
-               headers: {
-                  authorization: localStorage.getItem("token"),
-               },
-            });
-            dispatch({
-               type: "SAVE_ARCHIVED_NOTES_FROM_SERVER",
-               payload: response.data.archives,
-            });
-         } catch (error) {
-            console.log(error);
-         }
-      })();
-   }, []);
+      if (isLoggedIn) {
+         (async () => {
+            try {
+               const response = await axios.get(`/api/archives`, {
+                  headers: {
+                     authorization: localStorage.getItem("token"),
+                  },
+               });
+               dispatch({
+                  type: "SAVE_ARCHIVED_NOTES_FROM_SERVER",
+                  payload: response.data.archives,
+               });
+            } catch (error) {
+               console.log(error);
+            }
+         })();
+      }
+   }, [isLoggedIn]);
 
    //adding a note via API call
    const addNote = async () => {

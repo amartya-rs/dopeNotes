@@ -8,21 +8,35 @@ import {
    LabelPage,
    Page404,
 } from "./pages/index";
-import { TopNav, Footer } from "./components";
+import {
+   TopNav,
+   Footer,
+   Modal,
+   PrivateRoute,
+   RestrictedRoute,
+} from "./components";
 
 const App = () => {
    return (
       <div className="App">
          <TopNav />
          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/landingpage" element={<LandingPage />} />
-            <Route path="/labels" element={<LabelPage />} />
-            <Route path="/archive" element={<ArchivePage />} />
-            <Route path="/trash" element={<TrashPage />} />
+            {/*restricted routes*/}
+            <Route element={<RestrictedRoute />}>
+               <Route path="/" element={<LandingPage />} />
+            </Route>
+            {/*private routes*/}
+            <Route element={<PrivateRoute />}>
+               <Route path="/home" element={<HomePage />} />
+               <Route path="/labels" element={<LabelPage />} />
+               <Route path="/archive" element={<ArchivePage />} />
+               <Route path="/trash" element={<TrashPage />} />
+            </Route>
             <Route path="*" element={<Page404 />} />
          </Routes>
          <Footer />
+
+         <Modal />
       </div>
    );
 };

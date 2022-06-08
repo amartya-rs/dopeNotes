@@ -15,8 +15,8 @@ const Sidebar = (props) => {
       <aside className="pl-8 mt-2">
          <ul className="side-nav font-medium pl-1">
             <li
-               className={props.activePage === "/" ? "active" : undefined}
-               onClick={() => navigate("/")}
+               className={props.activePage === "/home" ? "active" : undefined}
+               onClick={() => navigate("/home")}
             >
                <HomeIcon />
                <span>Home</span>
@@ -45,7 +45,10 @@ const Sidebar = (props) => {
                <span>Trash</span>
             </li>
             <li>
-               <button className="button button-icons primary round-edge">
+               <button
+                  className="button button-icons primary round-edge"
+                  onClick={props.logout}
+               >
                   <LogoutIcon />
                   LOGOUT
                </button>
