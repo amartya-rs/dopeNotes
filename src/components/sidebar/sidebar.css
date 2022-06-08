@@ -32,7 +32,7 @@ aside {
 }
 
 .active {
-   background-color: rgba(0, 0, 0, 0.2);
+   background-color: var(--SIDEBAR-ACTIVE);
 }
 
 .side-nav li:last-child {
